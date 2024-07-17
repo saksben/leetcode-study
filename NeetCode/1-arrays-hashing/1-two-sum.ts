@@ -39,8 +39,8 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
 function twoSum(nums: number[], target: number): number[] {
     let map = new Map() // Create a map
     for (let i = 0; i < nums.length; ++i) {
-        if (map.has(target - nums[i])) { // Looping through nums, if the map already has a number that equals target when the current index's number is subtracted, return that index and this index
-            return [map.get(target - nums[i]), i]
+        if (map.has(target - nums[i])) { // Looping through nums, if the map already has a number that equals target when the current index's number is subtracted (using .has() to get the key, which is the integer), return that index and this index
+            return [map.get(target - nums[i]), i] // (using .get() to get the value, which is the index)
         }
         map.set(nums[i], i) // Otherwise, add this number and its index to the map
     }
