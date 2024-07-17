@@ -41,7 +41,8 @@ O(1) - O(n) time complexity
 * When the problem can benefit from tracking elements or cumulative values using hash tables.
 
 Strategy:
-if ((problem.req.contains(immediateLookupByIndexOrKey) || problem.req.contains(frequentLookupByIndexOrKey)) && canStoreInArray) {
+const hint = "I need to look up whether x exists"
+if ((problem.req.has(immediateLookupByIndexOrKey) || problem.req.has(frequentLookupByIndexOrKey)) && canStoreInArray) {
     const looping = 'inefficient';
     if (array.wouldRequire(looping) || array.length === undefined) {
         useHashTable();
