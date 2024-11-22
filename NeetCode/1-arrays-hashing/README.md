@@ -41,13 +41,34 @@ O(1) - O(n) time complexity
 * When the problem can benefit from tracking elements or cumulative values using hash tables.
 
 Strategy:
-const hint = "I need to look up whether x exists"
+const hint1 = "I need to look up whether x exists"
+const hint2 = "I need to check or distinguish something for each value in a data structure (e.g. counts or comparisons)"
 if ((problem.req.has(immediateLookupByIndexOrKey) || problem.req.has(frequentLookupByIndexOrKey)) && canStoreInArray) {
     const looping = 'inefficient';
     if (array.wouldRequire(looping) || array.length === undefined) {
         useHashTable();
     } else {
         useArray();
+    }
+
+    try {
+        let map = new Map()
+        for (let i = 0; i < array.length; i++) {
+            if (map.has(array[i])) {
+                doLogic(map.get(array[i]))
+            } else {
+                map.set(array[i], i)
+            }
+        }
+    } catch (error) {
+        if (error instanceof LoopTypeError) {
+            let obj = {}
+            let count = countingLogic()
+            for (let element of array) {
+                obj[element] = count
+            }
+        }
+        console.log(error + "; try the same thing with an object, set, or other data structure")
     }
 }
 
