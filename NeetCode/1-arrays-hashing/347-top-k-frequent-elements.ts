@@ -25,6 +25,40 @@ Follow up: Your algorithm's time complexity must be better than O(n log n), wher
 */
 
 function topKFrequent(nums: number[], k: number): number[] {
+  const hm: {[key: number]: number} = {};
+  // Create an empty array to store the elements based on their frequency
+  const freq: number[][] = Array.from({ length: nums.length + 1 }, () => []);
+  let ans: number[] = []
+  
+  // Iterate through the input array and add the frequency of each element to the hash map
+  for (const num of nums) {
+      hm[num] = (hm[num] || 0) + 1;
+  }
+  // Iterate through the hash map and add the elements to the frequency array based on their frequency
+  for (const key in hm) {
+      const frequency = hm[key]
+      if (frequency) {
+          freq[frequency].push(Number(key))
+      }
+  }
+
+  // Iterate through the frequency array from the highest frequency to the lowest
+  for (let j = freq.length - 1; j >= 0 && k > 0; j--) {
+      // If the current frequency array is not empty, add the elements to the ans array
+      // and decrement k until k is 0 or the frequency array is empty
+      if (freq[j].length > 0) {
+          for (const element of freq[j]) {
+              if (k > 0) {
+                  ans.push(element)
+                  k--
+              }
+          }
+      }
+  }
+  return ans;
+};
+
+function topKFrequent2(nums: number[], k: number): number[] {
   const map = new Map();
   const bucket: Array<Set<number>> = [];
   const result: number[] = [];
