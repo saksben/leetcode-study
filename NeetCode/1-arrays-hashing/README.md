@@ -46,7 +46,7 @@ const hint2 = "I need to check or distinguish something for each value in a data
 if ((problem.req.has(immediateLookupByIndexOrKey) || problem.req.has(frequentLookupByIndexOrKey)) && canStoreInArray) {
     const looping = 'inefficient';
     if (array.wouldRequire(looping) || array.length === undefined) {
-        useHashTable();
+        useHashTable() || useObject();
     } else {
         useArray();
     }
